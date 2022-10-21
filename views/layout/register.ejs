@@ -1,0 +1,57 @@
+<%- include('./head.ejs') %> 
+
+  <main class="container my-5" style="max-width: 700px">
+    <h1 class="mt-5 mb-5 text-center">Formulario de Registro</h1>
+    <form action="/register" method="post" class="row g-3">
+     
+      <% if(hasNotify) {%>
+        <p class="fw-bold text-center <%= text_style %> "> <%= message %>  </p>
+      <% } %> 
+
+      <div class="col-md-6 mb-2">
+        <label for="name" class="label-form">Ingrese su nombre:</label>
+        <input type="text" class="form-control border-2" id="name" name="name" placeholder="martina..">
+      </div>
+
+      <div class="col-md-6 mb-2">
+        <label for="last_name" class="">Ingrese su apellido:</label>
+        <input type="text" class="form-control border-2" id="last_name" name="last_name" placeholder="perez...">
+      </div>
+
+      <div class="col-md-6 mb-2">
+        <label for="email" class="">Ingrese su email:</label>
+        <input type="email" class="form-control border-2" id="email" name="email" placeholder="example@example.." required>
+      </div>
+
+      <div class="col-md-6 mb-2">
+        <label for="edad" class="">Ingrese su edad:</label>
+        <input type="number" class="form-control border-2" id="edad" name="age" placeholder="100.." required>
+      </div>
+
+      <div class="col-md-6 mb-2">
+        <label for="username" class="">Cree su usuario: <span class="text-danger">(sin espacios ni puntos)</span></label>
+        <input type="text" class="form-control border-2" id="username" name="username" placeholder="tu-gatita.." required>
+      </div>
+
+      <div class="col-md-6 mb-2">
+        <label for="password" class="">Cree su contraseña:</label>
+        <input type="password" class="form-control border-2" id="password" name="password" placeholder="*****.." required>
+      </div>
+
+      <div class="col-md-12 mb-2">
+        <label for="info" class="">info: <span class="text-danger">ejemp: jr-backend-dev</span></label>
+        <input type="text" class="form-control border-2" id="info" name="info" placeholder="inspector de billeteras" required>
+      </div>
+      
+      <div class="d-grid gap-2 text-center">
+        <p>have account? <a href="/login">login.</a></p>
+      </div>
+
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+      </div>
+      <p class="mt-5 mb-3 text-muted text-center">&copy; 2022 mikell-bobadilla</p>
+    </form>
+  </main>
+  
+<%- include('./footer.ejs') %> 

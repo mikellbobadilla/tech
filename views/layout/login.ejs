@@ -1,0 +1,32 @@
+<%- include('./head.ejs') %>
+
+<main class="container my-5" style="max-width: 500px">
+  <h1 class="mt-5 mb-5 text-center">Login</h1>
+  <form action="/login" method="post" class="row g-3">
+  
+    <% if(hasNotify) {%>
+      <p class="fw-bold text-center <%= text_style %> "> <%= message %>  </p>
+    <% } %> 
+
+    <div class="col-md-12 mb-2">
+      <label for="username" class="">Usuario:</label>
+      <input type="text" class="form-control border-2" id="username" name="username" placeholder="tu-gatita.." required>
+    </div>
+
+    <div class="col-md-12 mb-2">
+      <label for="password" class="">Contrasena:</label>
+      <input type="password" class="form-control border-2" id="password" name="password" placeholder="*****.." required>
+    </div>
+
+    <div class="d-grid gap-2 text-center">
+      <p>Don't hav account? <a href="/register">create one!</a></p>
+    </div>
+
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn btn-primary">Iniciar session</button>
+    </div>
+    <p class="mt-5 mb-3 text-muted text-center">&copy; 2022 mikell-bobadilla</p>
+  </form>
+</main>
+
+<%- include('./footer.ejs') %> 
