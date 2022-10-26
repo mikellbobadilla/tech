@@ -2,10 +2,10 @@
 
   <main class="container my-5" style="max-width: 700px">
     <h1 class="mt-5 mb-5 text-center">Formulario de Registro</h1>
-    <form action="/register" method="post" class="row g-3">
+    <form action="/users/create" method="post" class="row g-3">
      
-      <% if(hasNotify) {%>
-        <p class="fw-bold text-center <%= text_style %> "> <%= message %>  </p>
+      <% if(has_errors) {%>
+        <p class="fw-bold text-center text-danger "> <%= error_message %>  </p>
       <% } %> 
 
       <div class="col-md-6 mb-2">
@@ -15,7 +15,7 @@
 
       <div class="col-md-6 mb-2">
         <label for="last_name" class="">Ingrese su apellido:</label>
-        <input type="text" class="form-control border-2" id="last_name" name="last_name" placeholder="perez...">
+        <input type="text" class="form-control border-2" id="last_name" name="surname" placeholder="perez...">
       </div>
 
       <div class="col-md-6 mb-2">

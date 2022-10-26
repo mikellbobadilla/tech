@@ -17,7 +17,7 @@ User.init({
     type: DataTypes.STRING,
     allowNull: false
   },
-  last_name: {
+  surname: {
     type: DataTypes.STRING,
     allowNull: false
   },

@@ -4,8 +4,8 @@ import cookieParser from 'cookie-parser'
 
 // Routes
 import { indexRoutes } from '../routes/index.routes.js'
-import { authRouter } from '../routes/auth.routes.js'
-
+import authRouter from '../routes/aut.routes.js'
+import userRouter from '../routes/user.routes.js'
 // Error Responses
 import { renderNotFoundPage } from '../response_pages/notFound.page.js'
 import { renderInternalServerPage } from '../response_pages/internalServer.page.js'
@@ -19,8 +19,9 @@ app.use(express.static('public'))
 app.set('view engine', 'ejs')
 
 // Routes
-app.use(indexRoutes)
+app.use('/', indexRoutes)
 app.use(authRouter)
+app.use('/users', userRouter)
 
 // Handle Errors
 app.use((req, res, next) => {

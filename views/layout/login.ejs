@@ -4,22 +4,22 @@
   <h1 class="mt-5 mb-5 text-center">Login</h1>
   <form action="/login" method="post" class="row g-3">
   
-    <% if(hasNotify) {%>
-      <p class="fw-bold text-center <%= text_style %> "> <%= message %>  </p>
+    <% if(has_errors) {%>
+      <p class="fw-bold text-center text-danger"> <%= error_message %>  </p>
     <% } %> 
 
     <div class="col-md-12 mb-2">
       <label for="username" class="">Usuario:</label>
-      <input type="text" class="form-control border-2" id="username" name="username" placeholder="tu-gatita.." required>
+      <input type="text" class="form-control border-2" id="username" name="username" placeholder="usuario.." required>
     </div>
 
     <div class="col-md-12 mb-2">
-      <label for="password" class="">Contrasena:</label>
+      <label for="password" class="">Contraseña:</label>
       <input type="password" class="form-control border-2" id="password" name="password" placeholder="*****.." required>
     </div>
 
     <div class="d-grid gap-2 text-center">
-      <p>Don't hav account? <a href="/register">create one!</a></p>
+      <p>Don't hav account? <a href="/users/create">create one!</a></p>
     </div>
 
     <div class="d-grid gap-2">

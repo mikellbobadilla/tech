@@ -20,9 +20,5 @@ import bcrypt from 'bcrypt'
  * @returns {Promise<Boolean>} return a promise with a boolean
  */
 export const decodePass = async (password, passEncoded) => {
-  try {
     return await bcrypt.compare(password, passEncoded)
-  } catch (err) {
-    return err
-  }
 }
