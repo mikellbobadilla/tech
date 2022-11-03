@@ -12,6 +12,12 @@ Comment.init({
   comment: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  id_post:{
+    type: DataTypes.BIGINT.UNSIGNED
+  },
+  id_user:{
+    type: DataTypes.BIGINT.UNSIGNED
   }
 }, {
   modelName: 'comments',

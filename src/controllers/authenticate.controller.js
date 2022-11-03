@@ -16,6 +16,7 @@ export const authenticate = async (req, res, next) => {
     return res.status(400).render('layout/login', { head_title: 'login', has_errors: true, error_message: 'username or password incorrect!' })
   }
 
+  console.log(user)
   const token = generateJWT(user)
 
   return res.status(200).cookie('jwt', 'bearer '+ token).redirect('/')

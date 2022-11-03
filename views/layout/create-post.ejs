@@ -1,0 +1,33 @@
+<%- include('./head.ejs') %> 
+
+  <main class="container my-5" style="max-width: 700px">
+    <h1 class="mt-5 mb-5 text-center">Nuevo Post</h1>
+    <form action="/create/post" method="post" class="row g-3">
+     
+      <% if(has_errors) {%>
+        <p class="fw-bold text-center text-danger "> <%= error_message %>  </p>
+      <% } %> 
+
+      <div class="col-md-12 mb-2">
+        <label for="title" class="label-form">Ingrese el Titulo</label>
+        <input type="text" class="form-control border-2" id="title" name="title" placeholder="martina..">
+      </div>
+
+      <div class="col-md-12 mb-2">
+        <label for="content" class="">Ingrese el contenido</label>
+        <textarea name="content" id="content" class="form-control border-2"></textarea>
+      </div>
+
+      <div class="col-md-12 mb-2">
+        <label for="type_post" class="">Tipo de Post</label>
+        <input type="text" class="form-control border-2" id="type_post" name="type_post" placeholder="post" required>
+      </div>
+
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary">Publicar</button>
+      </div>
+      <p class="mt-5 mb-3 text-muted text-center">&copy; 2022 mikell-bobadilla</p>
+    </form>
+  </main>
+  
+<%- include('./footer.ejs') %> 

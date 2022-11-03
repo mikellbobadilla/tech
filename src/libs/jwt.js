@@ -6,7 +6,7 @@ import { env } from '../config/env.js'
  * @param {String} cookie rivieved in the request
  * @returns {String} return the token extacted from the request
  */
-const extractToken = (cookie) => {
+export const extractToken = (cookie) => {
   const token = cookie.split(' ')[1]
   return token
 }
@@ -19,8 +19,8 @@ const extractToken = (cookie) => {
 export const generateJWT = (user) => {
   try {
     const token = JWT.sign({
-      id: user.id,
-      name: user.name
+      id: user.user_id,
+      name: user.username
     },
       env.jwt_key, {
       algorithm: 'HS256',
