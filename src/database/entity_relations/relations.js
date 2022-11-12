@@ -4,21 +4,19 @@ import { Like } from '../models/Like.js'
 import { Post } from '../models/Post.js'
 import { sequelize } from '../config/sequelize.js'
 
-User.hasMany(Post)
-User.hasMany(Comment)
-User.hasMany(Like)
+User.belongsToMany(Post, {through: Like})
+Post.belongsToMany(User, {through: Like})
 
-Like.belongsTo(User)
-Like.belongsTo(Post)
-
-Comment.belongsTo(Post)
-Comment.belongsTo(User)
-
-Post.hasOne(Like)
-Post.hasMany(Comment)
+User.hasMany(Post, {foreignKey: 'id_user'})
 Post.belongsTo(User)
 
+Post.hasMany(Comment, {foreignKey: 'id_post'})
+Comment.belongsTo(Post)
+
+User.hasMany(Comment, {foreignKey: 'id_user'})
+Comment.belongsTo(User)
+
 // Creating Tables
-sequelize.sync({ force: true, logging: false })
+sequelize.sync({ force: true, logging: true })
   .then(() => console.log('All tables created!...'))
   .catch(err => console.error(err.message))

@@ -4,15 +4,24 @@ import { sequelize } from '../config/sequelize.js'
 class Like extends Model { }
 
 Like.init({
-  like_id: {
+  id_user:{
     type: DataTypes.BIGINT,
-    primaryKey: true,
-    autoIncrement: true
+    references:{
+      model: 'users',
+      key: 'id'
+    }
+  },
+  id_post:{
+    type: DataTypes.BIGINT,
+    references:{
+      model: 'posts',
+      key: 'id'
+    }
   }
 }, {
   sequelize,
-  timestamps: false,
-  updatedAt: false,
+  timestamps: true,
+  updatedAt: true,
   createdAt: true,
   modelName: 'likes'
 })

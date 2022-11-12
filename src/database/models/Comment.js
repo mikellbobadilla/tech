@@ -1,29 +1,38 @@
 import { Model, DataTypes } from 'sequelize'
 import { sequelize } from '../config/sequelize.js'
 
+import { User } from './User.js'
+import { Post } from './Post.js'
+
 class Comment extends Model { }
 
 Comment.init({
-  comment_id: {
+  id: {
     type: DataTypes.BIGINT,
     primaryKey: true,
     autoIncrement: true
   },
-  comment: {
-    type: DataTypes.STRING,
-    allowNull: false
+  id_user: {
+    type: DataTypes.BIGINT,
+    allowNull: false,
+    references: {
+      model: 'users',
+      key: 'id'
+    }
   },
-  id_post:{
-    type: DataTypes.BIGINT.UNSIGNED
-  },
-  id_user:{
-    type: DataTypes.BIGINT.UNSIGNED
+  id_post: {
+    type: DataTypes.BIGINT,
+    allowNull: false,
+    references: {
+      model: 'posts',
+      key: 'id'
+    }
   }
 }, {
   modelName: 'comments',
   sequelize,
-  timestamps: false,
-  updatedAt: false,
+  timestamps: true,
+  updatedAt: true,
   createdAt: true
 })
 

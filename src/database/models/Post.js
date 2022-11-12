@@ -4,27 +4,31 @@ import { sequelize } from '../config/sequelize.js'
 class Post extends Model { }
 
 Post.init({
-  post_id: {
+  id: {
     type: DataTypes.BIGINT,
     primaryKey: true,
     autoIncrement: true
   },
+  id_user: {
+    type: DataTypes.BIGINT,
+    allowNull: false,
+    references: {
+      model: 'users',
+      key: 'id'
+    }
+  },
   title: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   content: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  type_post: {
     type: DataTypes.STRING,
     allowNull: false
   }
 }, {
   sequelize,
-  timestamps: false,
-  updatedAt: false,
+  timestamps: true,
+  updatedAt: true,
   createdAt: true,
   modelName: 'posts'
 })

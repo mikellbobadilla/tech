@@ -4,20 +4,20 @@ import { sequelize } from '../config/sequelize.js'
 class User extends Model { }
 
 User.init({
-  id:{
+  id: {
     type: DataTypes.BIGINT,
     primaryKey: true,
     autoIncrement: true
   },
-  name:{
+  name: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  surname:{
+  surname: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  age:{
+  age: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
@@ -26,7 +26,7 @@ User.init({
     allowNull: false,
     unique: true
   },
-  role:{
+  role: {
     type: DataTypes.STRING,
     allowNull: false,
     defaultValue: 'USER'
@@ -35,13 +35,13 @@ User.init({
     type: DataTypes.STRING,
     allowNull: false
   },
-  profession:{
+  profession: {
     type: DataTypes.STRING
   }
 }, {
   sequelize,
-  timestamps: false,
-  updatedAt: false,
+  timestamps: true,
+  updatedAt: true,
   createdAt: true,
   modelName: 'users'
 })
