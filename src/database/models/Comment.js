@@ -8,32 +8,33 @@ class Comment extends Model { }
 
 Comment.init({
   id: {
-    type: DataTypes.BIGINT,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  id_user: {
-    type: DataTypes.BIGINT,
+  userId: {
+    type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'users',
+      model: User,
       key: 'id'
     }
   },
-  id_post: {
-    type: DataTypes.BIGINT,
+  postId: {
+    type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'posts',
+      model: Post,
       key: 'id'
     }
   }
 }, {
   modelName: 'comments',
   sequelize,
-  timestamps: true,
-  updatedAt: true,
-  createdAt: true
 })
 
+Comment.belongsTo(User)
+Comment.belongsTo(Post)
+User.hasMany(Comment)
+Post.hasMany(Comment)
 export { Comment }

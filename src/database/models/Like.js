@@ -1,29 +1,31 @@
 import { Model, DataTypes } from 'sequelize'
 import { sequelize } from '../config/sequelize.js'
+import { User } from './User.js'
+import { Post } from './Post.js'
 
 class Like extends Model { }
 
 Like.init({
-  id_user:{
-    type: DataTypes.BIGINT,
-    references:{
-      model: 'users',
+  userId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: User,
       key: 'id'
     }
   },
-  id_post:{
-    type: DataTypes.BIGINT,
-    references:{
-      model: 'posts',
+  postId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Post,
       key: 'id'
     }
   }
 }, {
   sequelize,
-  timestamps: true,
-  updatedAt: true,
-  createdAt: true,
   modelName: 'likes'
 })
+
+User.belongsToMany(Post, {through: Like})
+Post.belongsToMany(User, {through: Like})
 
 export { Like }

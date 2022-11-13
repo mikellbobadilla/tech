@@ -4,13 +4,12 @@
   <h1 class="mt-5 mb-5 text-center">Login</h1>
   <form action="/login" method="post" class="row g-3">
   
-    <% if(has_errors) {%>
+    <% if(!has_errors) {%>
       <p class="fw-bold text-center text-danger"> <%= error_message %>  </p>
-    <% } %> 
-
+    <% }  %> 
     <div class="col-md-12 mb-2">
-      <label for="username" class="">Usuario:</label>
-      <input type="text" class="form-control border-2" id="username" name="username" placeholder="usuario.." required>
+      <label for="email	" class="">Email:</label>
+      <input type="email" class="form-control border-2" id="email" name="email" placeholder="usuario.." required>
     </div>
 
     <div class="col-md-12 mb-2">

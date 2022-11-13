@@ -1,11 +1,13 @@
 import { Router } from 'express'
-import { authenticate } from '../controllers/authenticate.controller.js'
+import { authController } from '../controllers/auth/authentication.js'
 const auth = Router()
 
-auth.get('/login', (req, res) => {
-  return res.status(200).render('layout/login', {head_title: 'login', has_errors: false})
+auth.get("/login", (req, res) => {
+  return res
+    .status(200)
+    .render('layout/login', { head_title: 'login', has_errors: true })
 })
 
-auth.post('/login', authenticate)
+auth.post('/login', authController)
 
 export default auth

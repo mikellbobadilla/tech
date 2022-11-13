@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt'
  * @param {String} password user's password
  * @returns {Promise<String>} return a promise with the token
  */
- export const encodePass = async (password) => {
+export const encodePass = async (password) => {
   try {
     return await bcrypt.hash(password, 10)
   } catch (err) {
@@ -20,5 +20,5 @@ import bcrypt from 'bcrypt'
  * @returns {Promise<Boolean>} return a promise with a boolean
  */
 export const decodePass = async (password, passEncoded) => {
-    return await bcrypt.compare(password, passEncoded)
+  return await bcrypt.compare(password, passEncoded)
 }

@@ -1,36 +1,35 @@
 import { Model, DataTypes } from 'sequelize'
 import { sequelize } from '../config/sequelize.js'
+import { User } from './User.js'
 
 class Post extends Model { }
 
 Post.init({
   id: {
-    type: DataTypes.BIGINT,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  id_user: {
-    type: DataTypes.BIGINT,
-    allowNull: false,
+  userId: {
+    type: DataTypes.INTEGER,
     references: {
-      model: 'users',
+      model: User,
       key: 'id'
     }
   },
   title: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
   content: {
     type: DataTypes.STRING,
     allowNull: false
-  }
+  },
 }, {
   sequelize,
-  timestamps: true,
-  updatedAt: true,
-  createdAt: true,
   modelName: 'posts'
 })
 
+Post.belongsTo(User)
+User.hasMany(Post)
 export { Post }

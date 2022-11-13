@@ -37,16 +37,16 @@ export const existsByUsername = async (username) => {
 
 /**
  * Find and return the user in the database
- * @param {String} username to find in the database
+ * @param {String} email to find in the database
  * @returns {Promise<User|null>} return an User or null
  * Also return an instance of Error if somethings broke 
  */
-export const getByUsername = async (username) => {
+export const getByEmail = async (email) => {
 
   const user = await User.findOne({
-    attributes: ['user_id', 'username', 'password'],
+    attributes: ['id', 'email', 'password', 'role'],
     where: {
-      username: username
+      email: email
     }
   })
 
@@ -56,23 +56,22 @@ export const getByUsername = async (username) => {
 /**
  * Save the user in the database
  * @param {User} user 
- * @returns {Promise<User|null>} return a model instance of user or return null
+ * @returns {Promise<User|null>} return a model instance of user or null
  */
-export const saveUser = async (user) => {
-  user.age = Number(user.age)
-  const pass_encoded = await encodePass(user.password)
-  const u = await User.create({
-    name: user.name,
-    surname: user.surname,
-    age: user.age,
-    email: user.email,
-    username: user.username,
+export const saveUser = async ({ name, surname, password, age, email, role, profession }) => {
+  age = Number(age)
+  const pass_encoded = await encodePass(password)
+  const user = await User.create({
+    name: name,
+    surname: surname,
+    age: age,
+    email: email,
+    role: role,
     password: pass_encoded,
-    info: user.info,
-    role: user.role
+    profession: profession
   })
 
-  return u
+  return user
 }
 
 
@@ -93,5 +92,16 @@ export const userExists = async (username, email) => {
   })
 
   return u
+}
 
+/**
+ * Return all Users stored on the db
+ * @returns {Promise<User []>}
+ */
+export const getAllUsers = async () => {
+  const user = await User.findAll({
+    attributes: ['id', 'name', 'email', 'role', 'age', 'createdAt', 'updatedAt']
+  })
+
+  return user
 }

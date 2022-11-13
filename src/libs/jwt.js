@@ -16,19 +16,21 @@ export const extractToken = (cookie) => {
  * @param {User} user info the user from the database
  * @returns {String} return token
  */
-export const generateJWT = (user) => {
+export const generateJWT = ({ id, email, role }) => {
   try {
     const token = JWT.sign({
-      id: user.user_id,
-      name: user.username
+      id: id,
+      email: email,
+      role: role
     },
       env.jwt_key, {
       algorithm: 'HS256',
       expiresIn: '2 days'
     })
     return token
+    
   } catch (err) {
-
+    return err
   }
 }
 
@@ -48,10 +50,10 @@ export const decodeJWT = (token) => {
  * @returns {Boolean|String} return `invalid signature` in case the token was modified and `jwt expired` if expired
  */
 export const verifyJWT = (token) => {
-  try{
+  try {
     const is_expired = JWT.verify(token, env.jwt_key)
     return is_expired
-  }catch(err){
+  } catch (err) {
     return err.message
   }
 }

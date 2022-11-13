@@ -5,7 +5,7 @@ class User extends Model { }
 
 User.init({
   id: {
-    type: DataTypes.BIGINT,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
@@ -40,9 +40,6 @@ User.init({
   }
 }, {
   sequelize,
-  timestamps: true,
-  updatedAt: true,
-  createdAt: true,
   modelName: 'users'
 })
 

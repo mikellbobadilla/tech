@@ -2,8 +2,8 @@
 
   <main class="container my-5" style="max-width: 700px">
     <h1 class="mt-5 mb-5 text-center">Formulario de Registro</h1>
-    <form action="/users/create" method="post" class="row g-3">
-     
+    <form action="/users/register" method="post" class="row g-3">
+
       <% if(has_errors) {%>
         <p class="fw-bold text-center text-danger "> <%= error_message %>  </p>
       <% } %> 
@@ -29,18 +29,13 @@
       </div>
 
       <div class="col-md-6 mb-2">
-        <label for="username" class="">Cree su usuario: <span class="text-danger">(sin espacios ni puntos)</span></label>
-        <input type="text" class="form-control border-2" id="username" name="username" placeholder="tu-gatita.." required>
-      </div>
-
-      <div class="col-md-6 mb-2">
         <label for="password" class="">Cree su contraseña:</label>
         <input type="password" class="form-control border-2" id="password" name="password" placeholder="*****.." required>
       </div>
 
       <div class="col-md-12 mb-2">
-        <label for="info" class="">info: <span class="text-danger">ejemp: jr-backend-dev</span></label>
-        <input type="text" class="form-control border-2" id="info" name="info" placeholder="inspector de billeteras" required>
+        <label for="profession" class="">info: <span class="text-danger">ejemp: jr-backend-dev</span></label>
+        <input type="text" class="form-control border-2" id="profession" name="profession" placeholder="inspector de billeteras" required>
       </div>
       
       <div class="d-grid gap-2 text-center">
