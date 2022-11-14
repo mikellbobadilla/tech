@@ -3,7 +3,6 @@ import { decodePass } from '../../libs/bcrypt.js'
 import { generateJWT } from '../../libs/jwt.js'
 
 export const authController = async (req, res, next) => {
-  async (req, res, next) => {
     try {
       const { email, password } = req.body
 
@@ -27,4 +26,3 @@ export const authController = async (req, res, next) => {
       })
     }
   }
-}
