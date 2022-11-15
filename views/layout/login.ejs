@@ -4,7 +4,7 @@
   <h1 class="mt-5 mb-5 text-center">Login</h1>
   <form action="/login" method="post" class="row g-3">
   
-    <% if(!has_errors) {%>
+    <% if(has_errors) {%>
       <p class="fw-bold text-center text-danger"> <%= error_message %>  </p>
     <% }  %> 
     <div class="col-md-12 mb-2">
@@ -18,7 +18,7 @@
     </div>
 
     <div class="d-grid gap-2 text-center">
-      <p>Don't hav account? <a href="/users/create">create one!</a></p>
+      <p>Don't hav account? <a href="/users/register">create one!</a></p>
     </div>
 
     <div class="d-grid gap-2">

@@ -3,10 +3,8 @@ import logger from 'morgan'
 import cookieParser from 'cookie-parser'
 
 // Routes
-import { indexRoutes } from '../routes/index.routes.js'
-import authRouter from '../routes/aut.routes.js'
-import userRouter from '../routes/user.routes.js'
-import postRouter from '../routes/post.routes.js'
+import authRouter from '../authentication/routes/auth.routes.js'
+import userRouter from '../user/routes/user.routes.js'
 
 // Error Responses
 import { renderNotFoundPage } from '../response_pages/notFound.page.js'
@@ -22,10 +20,9 @@ app.set('view engine', 'ejs')
 app.use(express.json())
 
 // Routes
-app.use('/', indexRoutes)
 app.use(authRouter)
 app.use('/users', userRouter)
-app.use('/create', postRouter)
+
 
 
 // Handle Errors

@@ -1,5 +1,4 @@
-import { saveUser } from '../../database/repository/user.respository.js'
-import { existsByEmail, existsByUsername } from '../../database/repository/user.respository.js'
+import { existsByEmail, saveUser } from '../../database/repository/user.respository.js'
 
 export const createUser = async (req, res, next) => {
   try {
@@ -9,12 +8,12 @@ export const createUser = async (req, res, next) => {
 
     const user = await saveUser(req.body)
 
-    if (!user) throw new Error('An error has ocurred while saving the user, please try again!') 
+    if (!user) throw new Error('An error has ocurred while saving the user, please try again!')
 
     return res.status(200).redirect('/login')
 
   } catch (err) {
-    res.status.render('layout/register', {
+    return res.status.render('layout/register', {
       head_title: 'register',
       has_errors: true,
       error_message: err.message
