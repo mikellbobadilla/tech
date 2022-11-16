@@ -13,7 +13,7 @@ export const createUser = async (req, res, next) => {
     return res.status(200).redirect('/login')
 
   } catch (err) {
-    return res.status.render('layout/register', {
+    return res.status(400).render('layout/register', {
       head_title: 'register',
       has_errors: true,
       error_message: err.message

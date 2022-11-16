@@ -1,11 +1,11 @@
 import { Sequelize } from 'sequelize'
-import { env } from '../../config/env.js'
+import env from '../../config/env.js'
 
+// dotenv.config()
 export const sequelize = new Sequelize(
-  env.database,
-  env.user,
-  env.password,{
-    host: env.host,
-    dialect: 'mysql'
-  }
-)
+  env.DATABASE,
+  env.USER,
+  env.PASSWORD, {
+  host: env.HOST,
+  dialect: 'mysql'
+})

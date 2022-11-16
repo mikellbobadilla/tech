@@ -1,14 +1,11 @@
-import { config } from 'dotenv'
+import dotenv from 'dotenv'
+dotenv.config()
 
-config()
-
-const env = {
-  jwt_key: process.env.JWT_KEY,
-  database: process.env.DATABASE,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  host: process.env.HOST,
-  port: process.env.PORT
+export default {
+  JWT_KEY: process.env.JWT_KEY,
+  DATABASE: process.env.DATABASE,
+  USER: process.env.USER,
+  PASSWORD: process.env.PASSWORD,
+  HOST: process.env.HOST,
+  PORT: process.env.PORT
 }
-
-export { env }

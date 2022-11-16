@@ -1,8 +1,10 @@
 import { httpServer } from './src/config/http.js'
-import { env } from './src/config/env.js'
+import env from './src/config/env.js'
 
-const main = () => {
-  httpServer.listen(env.port, () => console.log(`Server listening on http://localhost:${env.port}`))
+const bootsrap = () => {
+  httpServer.listen(env.PORT, () => {
+    console.log(`Server listening on http://localhost:${env.PORT}`)
+  })
 }
 
-main()
+bootsrap()

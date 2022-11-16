@@ -1,5 +1,5 @@
 import JWT from 'jsonwebtoken'
-import { env } from '../config/env.js'
+import env from '../config/env.js'
 
 /**
  * Extract the token from the request
