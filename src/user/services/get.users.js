@@ -1,7 +1,7 @@
-import { getAllUsers } from '../../database/repository/user.respository.js'
+import { UserRepository } from '../repository/user.repository.js'
 
 export const getAll = async (req, res, next) => {
-  const users = await getAllUsers()
+  const users = await UserRepository.getAll()
   res.json({
     data: users
   })

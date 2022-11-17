@@ -1,23 +1,29 @@
-import { getByEmail } from '../../database/repository/user.respository.js'
-import { decodePass } from '../../libs/bcrypt.js'
-import { generateJWT } from '../../libs/jwt.js'
+import { UserRepository } from '../../user/repository/user.repository.js'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import env from '../../config/env.js'
 
 export const auth = async (req, res, next) => {
   try {
     const { email, password } = req.body
 
-    const user = await getByEmail(email)
+    const user = await UserRepository.getByEmail(email)
 
     if (!user) throw new Error('Credentials incorrect!')
 
-    const passValid = await decodePass(password, user.password)
+    const passValid = await bcrypt.compare(password, user.password)
 
     if (!passValid) throw new Error('Credentials incorrect!')
 
-    const token = generateJWT(user)
-
-    res.status(200).cookie('jwt', `Bearer ${token}`).redirect('/')
-
+    jwt.sign({
+      id: user.id,
+      email: user.email,
+      role: user.role
+    }, env.JWT_KEY, { algorithm: 'HS256', expiresIn: '2 days' }, (err, token) => {
+      if (err) throw new Error('An error has ocurred while creating the token')
+      
+      res.status(200).cookie('jwt', `Bearer ${token}`).redirect('/')
+    })
   } catch (err) {
     res.status(400).render('layout/register', {
       head_title: 'register',

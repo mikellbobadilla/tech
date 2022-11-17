@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 // Routes
 import authRouter from '../authentication/routes/auth.routes.js'
 import userRouter from '../user/routes/user.routes.js'
+import indexRoutes from '../routes/index.routes.js'
 
 // Error Responses
 import { renderNotFoundPage } from '../response_pages/notFound.page.js'
@@ -22,6 +23,7 @@ app.set('view engine', 'ejs')
 app.use(express.json())
 
 // Routes
+app.use(indexRoutes)
 app.use(authRouter)
 app.use('/users', userRouter)
 
@@ -30,7 +32,7 @@ app.use('/users', userRouter)
 
 // Handle Errors
 app.use((req, res, next) => {
-    return renderNotFoundPage(req.path,res)
+  return renderNotFoundPage(req.path, res)
 })
 
 app.use((err, req, res, next) => {

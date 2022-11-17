@@ -1,19 +1,19 @@
-import { existsByEmail, saveUser } from '../../database/repository/user.respository.js'
+import { UserRepository } from '../repository/user.repository.js'
 
 export const createUser = async (req, res, next) => {
   try {
-    const existsEmail = await existsByEmail(req.body.email)
+    const existsEmail = await UserRepository.getByEmail(req.body.email)
 
     if (existsEmail) throw new Error('User already exists!')
 
-    const user = await saveUser(req.body)
+    const user = await UserRepository.save(req.body)
 
     if (!user) throw new Error('An error has ocurred while saving the user, please try again!')
 
     return res.status(200).redirect('/login')
 
   } catch (err) {
-    return res.status(400).render('layout/register', {
+    return res.status(400).render('lay1out/register', {
       head_title: 'register',
       has_errors: true,
       error_message: err.message
