@@ -1,18 +1,16 @@
 import express from 'express'
 import logger from 'morgan'
 import cookieParser from 'cookie-parser'
-import dotenv from 'dotenv'
 // Routes
 import authRouter from '../authentication/routes/auth.routes.js'
 import userRouter from '../user/routes/user.routes.js'
 import indexRoutes from '../routes/index.routes.js'
+import postRoutes from '../post/routes/post.routes.js'
 
-// Error Responses
-import { renderNotFoundPage } from '../response_pages/notFound.page.js'
-import { renderInternalServerPage } from '../response_pages/internalServer.page.js'
+// Exeptions
+import { notFoundExeption } from '../exeptions/not_found.js'
+import { internalServerExeption } from '../exeptions/internal_server.js'
 const app = express()
-
-
 
 // Middlewares
 app.use(logger('dev'))
@@ -26,19 +24,11 @@ app.use(express.json())
 app.use(indexRoutes)
 app.use(authRouter)
 app.use('/users', userRouter)
-
-
+app.use('/posts', postRoutes)
 
 
 // Handle Errors
-app.use((req, res, next) => {
-  return renderNotFoundPage(req.path, res)
-})
-
-app.use((err, req, res, next) => {
-  console.error(err.status)
-  console.error(err)
-  return renderInternalServerPage(res)
-})
+app.use(notFoundExeption)
+app.use(internalServerExeption)
 
 export { app }
