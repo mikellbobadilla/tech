@@ -22,7 +22,7 @@ export const auth = async (req, res, next) => {
     }, env.JWT_KEY, { algorithm: 'HS256', expiresIn: '2 days' }, (err, token) => {
       if (err) throw new Error('An error has ocurred while creating the token')
       
-      res.status(200).cookie('jwt', `Bearer ${token}`).redirect('/')
+      res.status(200).cookie('jwt', `Bearer ${token}`).redirect('/posts/all')
     })
   } catch (err) {
     res.status(400).render('layout/login', {
