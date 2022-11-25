@@ -30,7 +30,7 @@ router.use(async (req, res, next) => {
 
 
 
-router.get('/all', async (req, res) => {
+router.get('/json', async (req, res) => {
   try {
 
     const posts = await PostRepository.getAll()
@@ -41,7 +41,7 @@ router.get('/all', async (req, res) => {
     })
 
   } catch (err) {
-    console.err(err) // TODO: Delete this shit
+    console.error(err) // TODO: Delete this shit
     return res.status(400).redirect('/posts/create')
   }
 })
@@ -70,7 +70,7 @@ router.post('/create', async (req, res) => {
 
     if (!posted) throw new Error('An error was ocurred while creating post')
 
-    return res.status(201).redirect('/posts/get')
+    return res.redirect('/posts/all')
 
   } catch (err) {
     return res.json({
@@ -89,16 +89,44 @@ router.get('/get', async (req, res) => {
 
     userId = Number(userId)
 
-    const posted = await Post.findAll({
-      where: {
-        userId: userId
-      }
-    })
-    res.json({
-      data: posted
+    const posts = await PostRepository.getByUserId(userId)
+    res.render('index', {
+      head_title: 'index',
+      posts: posts
     })
   } catch (err) {
     console.error(err)
+  }
+})
+
+router.get('/all', async (req, res) => {
+
+  try {
+
+    const posts = await PostRepository.getAll()
+
+    res.render('index', {
+      head_title: 'index',
+      posts: posts
+    })
+
+  } catch (err) {
+    console.err(err) // TODO: Delete this shit
+    return res.status(400).redirect('/posts/create')
+  }
+
+})
+
+
+router.get('/delete/:id?', async (req, res) => {
+  try {
+    req.params.id = Number(req.params.id)
+
+    await PostRepository.deleteById(req.params.id)
+
+    return res.status(200).redirect('/posts/all')
+  } catch (err) {
+    return res.redirect('/posts/json')
   }
 })
 

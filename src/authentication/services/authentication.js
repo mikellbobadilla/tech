@@ -25,9 +25,9 @@ export const auth = async (req, res, next) => {
       res.status(200).cookie('jwt', `Bearer ${token}`).redirect('/')
     })
   } catch (err) {
-    res.status(400).render('layout/register', {
-      head_title: 'register',
-      has_errors: false,
+    res.status(400).render('layout/login', {
+      head_title: 'login',
+      has_errors: true,
       error_message: err.message
     })
   }

@@ -4,7 +4,6 @@ import cookieParser from 'cookie-parser'
 // Routes
 import authRouter from '../authentication/routes/auth.routes.js'
 import userRouter from '../user/routes/user.routes.js'
-import indexRoutes from '../routes/index.routes.js'
 import postRoutes from '../post/routes/post.routes.js'
 
 // Exeptions
@@ -21,11 +20,9 @@ app.set('view engine', 'ejs')
 app.use(express.json())
 
 // Routes
-app.use(indexRoutes)
 app.use(authRouter)
 app.use('/users', userRouter)
 app.use('/posts', postRoutes)
-
 
 // Handle Errors
 app.use(notFoundExeption)

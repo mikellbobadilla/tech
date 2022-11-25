@@ -14,7 +14,7 @@ export class PostRepository {
         model: User,
         attributes: ['name', 'email', 'role']
       }],
-      attributes: ['id', 'title', 'content']
+      attributes: ['id', 'title', 'content', 'createdAt']
     })
 
     return posts
@@ -42,13 +42,27 @@ export class PostRepository {
    * @returns {Promise<Post[]}
    */
   static async getByUserId(userId) {
-    const posts = Post.findAll({
+    const posts = await Post.findAll({
       attributes: ['id', 'title', 'content', 'userId'],
       where: {
         userId: userId
-      }
+      },
+      include: [{
+        model: User,
+        attributes: ['name', 'email', 'role']
+      }]
     })
     return posts
+  }
+
+  static async deleteById(postId){
+    const deleted = Post.destroy({
+      cascade: true,
+      where: {
+        id: postId
+      }
+    })
+    return deleted
   }
 
 }
