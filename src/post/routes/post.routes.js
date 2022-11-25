@@ -1,11 +1,14 @@
 import { Router } from 'express'
 const router = Router()
+import { PostRepository } from '../repository/post.repository.js'
 
-// Temp
+// Temp -> delete this shit
 import { Post } from '../../database/models/Post.js'
 import Jwt from 'jsonwebtoken'
 import env from '../../config/env.js'
 
+
+// Middleware
 router.use(async (req, res, next) => {
   try {
     let { jwt } = req.cookies
@@ -25,10 +28,12 @@ router.use(async (req, res, next) => {
   }
 })
 
+
+
 router.get('/all', async (req, res) => {
   try {
 
-    const posts = await Post.findAll()
+    const posts = await PostRepository.getAll()
 
     return res.status(200).json({
       message: 'ok',
@@ -40,6 +45,8 @@ router.get('/all', async (req, res) => {
     return res.status(400).redirect('/posts/create')
   }
 })
+
+
 
 
 router.get('/create', (req, res) => {
@@ -54,17 +61,12 @@ router.get('/create', (req, res) => {
   }
 })
 
+
+
 router.post('/create', async (req, res) => {
   try {
-    const { title, content, userId } = req.body
 
-    console.log(req.body)
-
-    const posted = await Post.create({
-      userId: userId,
-      title: title,
-      content: content
-    })
+    const posted = PostRepository.save(req.body)
 
     if (!posted) throw new Error('An error was ocurred while creating post')
 
@@ -76,6 +78,8 @@ router.post('/create', async (req, res) => {
     })
   }
 })
+
+
 
 router.get('/get', async (req, res) => {
   try {

@@ -8,3 +8,4 @@ const bootsrap = () => {
 }
 
 bootsrap()
+console.clear()

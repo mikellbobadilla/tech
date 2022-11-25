@@ -1,4 +1,4 @@
-import { User } from '../models/User.js'
+import { User } from '../../database/models/User.js'
 import bcrypt from 'bcrypt'
 
 export class UserRepository {
@@ -41,12 +41,12 @@ export class UserRepository {
 
   /**
  * Return all Users stored on the db
- * @returns {Promise<User []>}
+ * @returns {Promise<User[]|null>}
  */
   static async getAll() {
-    const user = await User.findAll({
+    const users = await User.findAll({
       attributes: ['id', 'name', 'email', 'role', 'age', 'createdAt', 'updatedAt']
     })
-    return user
+    return users
   }
 }

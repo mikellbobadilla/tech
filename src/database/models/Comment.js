@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize'
-import { sequelize } from '../config/sequelize.js'
+import { sequelize } from '../../config/sequelize.js'
 
 import { User } from './User.js'
 import { Post } from './Post.js'
