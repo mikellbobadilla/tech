@@ -3,6 +3,14 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import env from '../../config/env.js'
 
+// Datos Primitivos
+
+// Tipo de dato Cadena de texto
+// let -> Se le puede reasignar su valor con cualquier tipo de dato
+let hola = "Hola me amo lucia" // let es una palabra reservada para crear variables
+
+
+
 export const auth = async (req, res, next) => {
   try {
     const { email, password } = req.body
@@ -21,7 +29,7 @@ export const auth = async (req, res, next) => {
       role: user.role
     }, env.JWT_KEY, { algorithm: 'HS256', expiresIn: '2 days' }, (err, token) => {
       if (err) throw new Error('An error has ocurred while creating the token')
-      
+
       res.status(200).cookie('jwt', `Bearer ${token}`).redirect('/posts/all')
     })
   } catch (err) {
